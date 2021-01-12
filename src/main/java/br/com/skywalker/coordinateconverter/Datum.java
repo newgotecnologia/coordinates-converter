@@ -14,4 +14,12 @@ public interface Datum {
 
 	String name();
 
+	default boolean isEqual(Datum other) {
+	    return null != other &&
+                this.getSemiAxis() == other.getSemiAxis() &&
+                this.getFlatness() == other.getFlatness() &&
+                this.getDeltaX() == other.getDeltaX() &&
+                this.getDeltaY() == other.getDeltaY() &&
+                this.getDeltaZ() == other.getDeltaZ();
+    }
 }
