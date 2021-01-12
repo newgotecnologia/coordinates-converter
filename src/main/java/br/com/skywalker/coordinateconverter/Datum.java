@@ -14,6 +14,8 @@ public interface Datum {
 
 	String name();
 
+	int getEpsgCode();
+
 	default boolean isEqual(Datum other) {
 	    return null != other &&
                 this.getSemiAxis() == other.getSemiAxis() &&
