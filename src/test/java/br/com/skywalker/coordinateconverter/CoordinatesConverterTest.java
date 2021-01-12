@@ -10,7 +10,7 @@ public class CoordinatesConverterTest {
 	public void testDDToDMS() {
 		DecimalDegreesCoordinates coordinates = new DecimalDegreesCoordinates(-46.1795700000, -23.5151100000,
 				Datums.SAD69);
-		assertEquals("46° 10' 46,4520\" S 23° 30' 54,3960\" W",
+		assertEquals("46° 10' 46.4520\" S 23° 30' 54.3960\" W",
 				CoordinatesConverter.toDMS(coordinates).toString());
 	}
 
@@ -31,7 +31,7 @@ public class CoordinatesConverterTest {
 		assertEquals(305777.4495, utmCoordinates.getX(), 0.01);
 		assertEquals(4882850.0889, utmCoordinates.getY(), 0.01);
 	}
-	
+
 	@Test
 	public void testDDToUTMWGS84() {
 		DecimalDegreesCoordinates coordinates = new DecimalDegreesCoordinates(-46.1795700000, -23.5151100000,
@@ -40,7 +40,7 @@ public class CoordinatesConverterTest {
 		assertEquals(305861.6300, utmCoordinates.getX(), 0.01);
 		assertEquals(4882853.4451, utmCoordinates.getY(), 0.01);
 	}
-	
+
 	@Test
 	public void testDDToUTMSIRGAS2000() {
 		DecimalDegreesCoordinates coordinates = new DecimalDegreesCoordinates(-46.1795700000, -23.5151100000,
