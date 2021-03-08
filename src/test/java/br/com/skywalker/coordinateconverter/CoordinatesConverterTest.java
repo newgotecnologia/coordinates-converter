@@ -11,7 +11,25 @@ public class CoordinatesConverterTest {
 		DecimalDegreesCoordinates coordinates = new DecimalDegreesCoordinates(-46.1795700000, -23.5151100000,
 				Datums.SAD69);
 		assertEquals("46° 10' 46.4520\" S 23° 30' 54.3960\" W",
-				CoordinatesConverter.toDMS(coordinates).toString());
+				CoordinatesConverter.toDMS(coordinates).toString().replace(",", "."));
+	}
+
+	@Test
+	public void testDDToDMS1() {
+		DecimalDegreesCoordinates coordinates = new DecimalDegreesCoordinates(-7, -37, Datums.SAD69);
+		DegreesMinutesSecondsCoordinates degreesMinutesSecondsCoordinates = CoordinatesConverter.toDMS(coordinates);
+		assertEquals("7° 0' 0.0000\" S 37° 0' 0.0000\" W",
+				degreesMinutesSecondsCoordinates.toString().replace(",", "."));
+		System.out.println(CoordinatesConverter.toDD(degreesMinutesSecondsCoordinates).toString());
+	}
+
+	@Test
+	public void testDMSToDD() {
+		DegreesMinutesSecondsCoordinates degreesMinutesSecondsCoordinates = new DegreesMinutesSecondsCoordinates(
+				Location.SOUTH, 7, 0, 0, Location.WEST, 37, 0, 0, Datums.WGS84);
+		System.out.println(CoordinatesConverter.toDD(degreesMinutesSecondsCoordinates).toString());
+		assertEquals("-7.0000000000 -37.0000000000",
+				CoordinatesConverter.toDD(degreesMinutesSecondsCoordinates).toString().replace(",", "."));
 	}
 
 	@Test
@@ -48,6 +66,14 @@ public class CoordinatesConverterTest {
 		UTMCoordinates utmCoordinates = CoordinatesConverter.toUTM(coordinates, Datums.SIRGAS2000);
 		assertEquals(305861.6300, utmCoordinates.getX(), 0.01);
 		assertEquals(4882853.4451, utmCoordinates.getY(), 0.01);
+	}
+	
+
+	@Test
+	public void testUTMToDMS() {
+		UTMCoordinates utmCoordinates = CoordinatesConverter.toUTM(new DecimalDegreesCoordinates(-7, -37, Datums.WGS84));
+		DegreesMinutesSecondsCoordinates degreesMinutesSecondsCoordinates = CoordinatesConverter.toDegreesMinutesSeconds(utmCoordinates);
+		System.out.println(degreesMinutesSecondsCoordinates.toString());
 	}
 
 }
